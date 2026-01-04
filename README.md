@@ -1,22 +1,22 @@
 # RecommendPy
 
-RecommendPy è un sistema di product recommendation basato su NLP e similarità semantica, esposto tramite FastAPI.  
-Il progetto analizza lo storico degli acquisti dei clienti e suggerisce prodotti simili utilizzando Sentence Transformers e cosine similarity.
+RecommendPy is a product recommendation system based on NLP and semantic similarity, exposed through FastAPI.  
+The project analyzes customers’ purchase history and suggests similar products using Sentence Transformers and cosine similarity.
 
 ---
 
-## Funzionalità
+## Features
 
-- Estrazione dati da SQL Server (schema SalesLT)
-- Costruzione di descrizioni prodotto aggregate
-- Generazione di embedding semantici
-- Calcolo della similarità tra prodotti
-- API REST per raccomandazioni personalizzate
-- Persistenza degli embedding su file `.pkl`
+- Data extraction from SQL Server (SalesLT schema)
+- Aggregated product description building
+- Semantic embedding generation
+- Product similarity computation
+- REST API for personalized recommendations
+- Embedding persistence using `.pkl` files
 
 ---
 
-## Tecnologie utilizzate
+## Technologies Used
 
 - Python
 - FastAPI
@@ -30,7 +30,7 @@ Il progetto analizza lo storico degli acquisti dei clienti e suggerisce prodotti
 
 ---
 
-## Struttura del progetto
+## Project Structure
 
 RecommendPy/
 │
@@ -51,15 +51,15 @@ Copia codice
 
 ## Dataset
 
-I dati vengono estratti da SQL Server utilizzando lo schema `SalesLT`:
+Data is extracted from SQL Server using the `SalesLT` schema, including:
 
-- Clienti
-- Prodotti
-- Categorie
-- Modelli
-- Descrizioni prodotto
+- Customers
+- Products
+- Categories
+- Models
+- Product descriptions
 
-Ogni prodotto viene rappresentato come una descrizione testuale combinata:
+Each product is represented as a combined textual description:
 
 Product + Category + Model + Description
 
@@ -68,9 +68,9 @@ Copia codice
 
 ---
 
-## Modello NLP
+## NLP Model
 
-Viene utilizzato il modello pre-addestrato:
+The project uses the pre-trained model:
 
 sentence-transformers/all-MiniLM-L6-v2
 
@@ -81,15 +81,15 @@ Copia codice
 
 ## Setup
 
-### Clonazione repository
+### Clone the repository
 
-git clone https://github.com/tuo-username/RecommendPy.git
+git clone https://github.com/your-username/RecommendPy.git
 cd RecommendPy
 
 shell
 Copia codice
 
-### Installazione dipendenze
+### Install dependencies
 
 pip install -r requirements.txt
 
@@ -98,30 +98,30 @@ Copia codice
 
 ---
 
-## Generazione embedding
+## Embedding Generation
 
-Configurare la connessione a SQL Server nello script `generate_embeddings.py` e lanciare:
+Configure the SQL Server connection inside `generate_embeddings.py` and run:
 
 python generate_embeddings.py
 
 yaml
 Copia codice
 
-Verranno creati i file:
+This will generate:
 
 - `Data/products_df.pkl`
 - `Data/embeddings.pkl`
 
 ---
 
-## Avvio API
+## Running the API
 
 uvicorn api:app --host 0.0.0.0 --port 8000
 
-yaml
+arduino
 Copia codice
 
-Documentazione Swagger disponibile su:
+Swagger documentation is available at:
 
 http://localhost:8000/docs
 
@@ -130,13 +130,13 @@ Copia codice
 
 ---
 
-## Endpoint
+## Endpoints
 
 ### GET /recommend/{customerId}
 
-Restituisce una lista di ProductID raccomandati per il cliente indicato.
+Returns a list of recommended ProductIDs for the specified customer.
 
-Esempio risposta:
+Example response:
 
 {
 "products": [712, 870, 945, 1021, 1103]
@@ -145,32 +145,32 @@ Esempio risposta:
 yaml
 Copia codice
 
-Se il cliente non ha acquisti precedenti, viene restituita una lista vuota.
+If the customer has no previous purchases, an empty list is returned.
 
 ---
 
-## Logica di raccomandazione
+## Recommendation Logic
 
-1. Recupero prodotti acquistati dal cliente
-2. Calcolo embedding medio delle descrizioni
-3. Calcolo similarità con tutti i prodotti
-4. Esclusione prodotti già acquistati
-5. Selezione dei Top 5 prodotti più simili
-
----
-
-## Miglioramenti futuri
-
-- Gestione cold start
-- Filtri per categoria
-- Raccomandazioni ibride
-- Cache con Redis
-- Persistenza su database
-- Ranking avanzato
+1. Retrieve products purchased by the customer
+2. Compute the average embedding of purchased product descriptions
+3. Calculate similarity against all products
+4. Exclude already purchased products
+5. Return the Top 5 most similar products
 
 ---
 
-## Autore
+## Future Improvements
+
+- Cold start handling
+- Category-based filtering
+- Hybrid recommendations
+- Redis caching
+- Database persistence
+- Advanced ranking strategies
+
+---
+
+## Author
 
 Alessandro  
 Software Engineer
